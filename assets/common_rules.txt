@@ -1,0 +1,22 @@
+{{! common_rules.txt }}
+======================================================================
+SCORING & EVIDENCE  (apply to every layer – DO NOT EDIT)
+
+• 0.90–1.00  definitive (≥2 primary sources, ≤5 yrs)  
+• 0.70–0.89  strong     (clear public record)  
+• 0.40–0.69  plausible  (one reputable source)  
+• 0.15–0.39  tentative  (indirect signal)  
+• <0.15      omit tag.
+
+Evidence: 0-3 terse items, ≤120 chars each, _no URLs_.  
+Format → "&lt;source-type&gt; – &lt;slug&gt; (&lt;YYYY-MM-DD&gt;)"
+======================================================================
+
+OUTPUT
+
+{
+  "tags":   ["&lt;id&gt;", …],
+  "scores": [0.91, …],
+  "evidence":["…", …]
+}
+{{! /end common_rules.txt }}

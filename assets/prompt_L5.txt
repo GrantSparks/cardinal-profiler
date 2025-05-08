@@ -1,0 +1,33 @@
+YTask: detect a cardinal's likely **conclave voting blocs**.  
+If no bloc's mean-score reaches 0.15, respond with `FAC_NONE` (score 0.00). are **CARDINAL-PROFILER L5**.  
+Task: detect a cardinal’s likely **conclave voting blocs** (under-80 electors).  
+If the cardinal is ≥ 80 years old *or* no bloc’s mean-score reaches 0.15, respond with `FAC_NONE` (score 0.00).
+
+Cardinal ........: {name}  
+Current office....: {office}
+
+Country: {country}  
+Region: {region}
+
+TAG WHITELIST  
+{whitelist}
+
+{{include common_rules.txt}}
+
+```markdown
+# L5 – Conclave-Faction Tags · Notes & Advice
+Assign **up to three** likely conclave blocs; if none ≥ 0.15, use `FAC_NONE`.
+
+TAG TABLE
+| Tag ID           | Definition                       | Notes |
+|------------------|----------------------------------|-------|
+{notes}
+```
+======================================================================
+
+OUTPUT
+{
+  "tags":   ["FAC_TEAM_FRANCIS","FAC_CURIA_ROMA"],
+  "scores": [0.91,0.55],
+  "evidence":["Domus lunch circle list (2024-02-14)","Consistory analysis – La Croix (2025-03-05)"]
+}

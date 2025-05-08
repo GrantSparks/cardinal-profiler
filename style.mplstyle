@@ -1,0 +1,10 @@
+font.size        : 9
+axes.titlesize   : 11
+axes.labelsize   : 9
+xtick.labelsize  : 8
+ytick.labelsize  : 8
+figure.dpi       : 150
+axes.grid        : True
+grid.linestyle   : :
+grid.alpha       : 0.25
+legend.fontsize  : 8

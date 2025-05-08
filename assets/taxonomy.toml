@@ -1,0 +1,434 @@
+# ============================================================
+#  Papal-Election Taxonomy — audit-driven revision, 2025-05-08
+#  Implements the “quick-wins” & structural fixes:
+#    • Europe split into three blocs
+#    • Residential-see roles graded; EMERITUS / AUX flags added
+#    • *_NONE / *_UNK placeholders removed (absence = missing)
+#    • Oversized / duplicate factions pruned or collapsed
+#    • L3 axes binned so only edge positions get tags
+# ============================================================
+version = 4
+
+
+# ------------------------------------------------------------------
+#  L1  ·  Regional / Linguistic blocs  (exactly one per record)
+# ------------------------------------------------------------------
+[layer.L1.tag.AFRICA]
+label      = "Africa"
+short_def  = "Any country on the African continent."
+notes      = "SECAM membership; African dioceses & nunciatures."
+
+[layer.L1.tag.EU_ITALY]
+label      = "Italy"
+short_def  = "Italian territory (incl. suburbicarian sees)."
+notes      = "Home-field conclave bloc; CEI membership."
+
+[layer.L1.tag.EU_WEST_NORDIC]
+label      = "Western & Nordic Europe"
+short_def  = "Iberia, France, Benelux, Germany, Austria, Nordics, UK & Ireland."
+notes      = "CCEE West/North groups; EU/EEA culture sphere."
+
+[layer.L1.tag.EU_CEE_BALK]
+label      = "Central-East & Balkan Europe"
+short_def  = "Poland, Czechia, Slovakia, Baltics, Balkans, Hungary, Ukraine, etc."
+notes      = "Post-Soviet & Balkan churches; CCEE East cluster."
+
+[layer.L1.tag.USA_CANADA]
+label      = "USA / Canada"
+short_def  = "United States or Canada."
+notes      = "USCCB / CCCB jurisdictions."
+
+[layer.L1.tag.CENTRAL_AMERICA]
+label      = "Central America"
+short_def  = "Mexico to Panama, including continental Caribbean states."
+notes      = "CELAM ‘CAM’ region."
+
+[layer.L1.tag.CARIBBEAN]
+label      = "Caribbean"
+short_def  = "Island states: Cuba, Haiti, Antilles, plus Guyana/Suriname/French Guiana."
+notes      = "Antilles Episcopal Conference."
+
+[layer.L1.tag.SOUTH_AMERICA]
+label      = "South America"
+short_def  = "Whole South-American continent, incl. Brazil."
+notes      = "CELAM ‘SAM’ region."
+
+[layer.L1.tag.MENA]
+label      = "Middle East & North Africa"
+short_def  = "Levant, Gulf, Egypt, Maghreb."
+notes      = "Arabic-speaking patriarchates."
+
+[layer.L1.tag.SOUTH_ASIA]
+label      = "South Asia"
+short_def  = "India, Pakistan, Bangladesh, Sri Lanka, Nepal."
+notes      = "CBCI & Syro-Malabar / Malankara hierarchs."
+
+[layer.L1.tag.SOUTH_EAST_ASIA]
+label      = "South-East Asia"
+short_def  = "ASEAN & neighbours: Indonesia, Philippines, Thailand, etc."
+notes      = "FABC SEA region."
+
+[layer.L1.tag.EAST_ASIA]
+label      = "East Asia"
+short_def  = "China (incl. HK & Macau), Taiwan, Japan, Koreas, Mongolia."
+notes      = "FABC East-Asia group."
+
+[layer.L1.tag.OCEANIA]
+label      = "Oceania"
+short_def  = "Australia, New Zealand, PNG, Pacific micro-states."
+notes      = "FCBCO jurisdictions."
+
+
+# ------------------------------------------------------------------
+#  L2  ·  Institutional Roles
+#  Absence of any INST_* tag = ‘no recognised office’.
+# ------------------------------------------------------------------
+[layer.L2.tag.INST_CUR_PREF]
+label      = "Curial Prefect"
+short_def  = "Head or pro-prefect of a Roman dicastery."
+notes      = "Annuario Pontificio; Holy-See press releases."
+
+[layer.L2.tag.INST_CUR_SEC]
+label      = "Curial Secretary / Under-secretary"
+short_def  = "Second-tier Curial executive."
+notes      = "Dicastery bulletin line-ups."
+
+[layer.L2.tag.INST_SEC_STATE]
+label      = "Secretariat of State (top team)"
+short_def  = "Secretary of State, Substitute, or Foreign Minister."
+notes      = "Holy-See communiqués."
+
+[layer.L2.tag.INST_C9]
+label      = "Council of Cardinals (C9) member"
+short_def  = "Current member of the Pope’s round-table advisers."
+notes      = "Press Office list 2024-04-16."
+
+[layer.L2.tag.INST_SYNOD_SEC]
+label      = "Synod Secretariat (Sec./Relator)"
+short_def  = "General Secretary or Relator-General of the Synod of Bishops."
+notes      = "Press communiqués on Synod appointments."
+
+[layer.L2.tag.INST_PAT]
+label      = "Patriarch / Major-Archbishop"
+short_def  = "Head of an Eastern Catholic church sui iuris."
+notes      = "CCEO directory."
+
+[layer.L2.tag.INST_DIPLO]
+label      = "Career Diplomat"
+short_def  = "≥ 10 years in Vatican diplomatic service."
+notes      = "CV lists multiple nunciatures."
+
+[layer.L2.tag.INST_REL_SUP]
+label      = "Religious Superior-General"
+short_def  = "Present or former SG of a religious institute."
+notes      = "Jesuit / Salesian / etc. generalate bulletins."
+
+[layer.L2.tag.INST_ACAD]
+label      = "Academic Rector"
+short_def  = "≥ 5 years rector of pontifical university or seminary."
+notes      = "Gregorian & Angelicum yearbooks."
+
+# ---- graded residential ordinaries --------------------------------
+[layer.L2.tag.INST_RES_CAPITAL]
+label      = "Capital / Mega-city See"
+short_def  = "Archbishop of a national capital OR city > 1 million."
+notes      = "E.g. New York, Manila, Lagos, Kinshasa."
+
+[layer.L2.tag.INST_RES_PRIMATE]
+label      = "Historical Primate See"
+short_def  = "Archbishop of a primatial seat (e.g. Toledo, Bogotá)."
+notes      = "Title ‘Primate’ in national hierarchy."
+
+[layer.L2.tag.INST_RES_VATICAN_RING]
+label      = "Vatican-Ring See"
+short_def  = "Large Italian metropolitans surrounding Rome."
+notes      = "Milan, Naples, Florence, Turin, Bologna."
+
+[layer.L2.tag.INST_RES_SUFFRAGAN]
+label      = "Minor Metropolitan / Diocesan"
+short_def  = "Residential ordinary of smaller province or suffragan."
+notes      = "Medium cities; non-primate metropolitans."
+
+# ---- personal status flags ----------------------------------------
+[layer.L2.tag.INST_EMERITUS]
+label      = "Emeritus"
+short_def  = "Retired from principal office, still voting."
+notes      = "Indicated by ‘emeritus’ in Vatican notices."
+
+[layer.L2.tag.INST_AUX]
+label      = "Auxiliary / Titular"
+short_def  = "Cardinal without ordinary jurisdiction (rare)."
+notes      = "Titular bishops elevated directly to cardinalate."
+
+
+# ------------------------------------------------------------------
+#  L3  ·  Ideological Axes  — only edge tags get assigned
+# ------------------------------------------------------------------
+# ---------- L3-A  Doctrine & Morality ----------
+[layer.L3.tag.DOCT_TRAD]
+label      = "Traditionalist (−2)"
+short_def  = "Integralist or pre-conciliar leanings."
+notes      = "Strong preference for 1962 Missal; integralist rhetoric."
+
+[layer.L3.tag.DOCT_CONSERV]
+label      = "Conservative (−1)"
+short_def  = "Bio-ethics & moral orthodoxy; sceptical of doctrinal change."
+notes      = "Continuity hermeneutic; cites *Veritatis Splendor*."
+
+[layer.L3.tag.DOCT_PROGRESS]
+label      = "Progressive (+1)"
+short_def  = "Open to LGBT blessings, women’s diaconate, re-reading HV."
+notes      = "Support for *Fiducia Supplicans*; German Synodal Path."
+
+# ---------- L3-B  Reform / Governance ----------
+[layer.L3.tag.REF_STATUS_QUO]
+label      = "Status quo (−1)"
+short_def  = "Prefers centralised, incremental governance."
+notes      = "Quotes *Pastor Bonus*; worries about fragmentation."
+
+[layer.L3.tag.REF_MAX]
+label      = "Synodal-maximalist (+1)"
+short_def  = "Strong decentralisation & lay co-decision."
+notes      = "Advocates authority shift to episcopal conferences."
+
+# ---------- L3-C  Social / Pastoral ----------
+[layer.L3.tag.SOC_SOCJUS]
+label      = "Social-justice / Inculturation (+1)"
+short_def  = "Priority for poverty, migration, ecology, local cultures."
+notes      = "CELAM Amazonia; *Fratelli tutti* rhetoric."
+
+[layer.L3.tag.SOC_MERCY]
+label      = "Mercy-pastoral (+1)"
+short_def  = "‘Field hospital’, radical inclusion rhetoric."
+notes      = "Emphasis on unconditional accompaniment."
+
+[layer.L3.tag.SOC_ECON_MARKET]
+label      = "Market-liberal economics (−1)"
+short_def  = "Pro-entrepreneurship, subsidiarity, low regulation."
+notes      = "*Centesimus Annus* pro-market reading."
+
+[layer.L3.tag.SOC_ECON_LEFT]
+label      = "Economic-left critique (+1)"
+short_def  = "Structural redistribution, anti-neoliberal stance."
+notes      = "Debt-cancellation & land-reform rhetoric."
+
+[layer.L3.tag.SOC_POP_NATL]
+label      = "Populist-national (−1)"
+short_def  = "Culture-war language tied to national identity."
+notes      = "Civilisational Catholicism; anti-globalist speeches."
+
+[layer.L3.tag.SOC_LIB_THEO]
+label      = "Liberation theology (+1)"
+short_def  = "Gutierrez-style ‘option for the poor’."
+notes      = "Cites Gustavo Gutiérrez; base-community advocacy."
+
+[layer.L3.tag.SOC_DIPLO_REAL]
+label      = "Diplomatic realist (0)"
+short_def  = "Prefers pragmatic peace over doctrinal conflict."
+notes      = "Ostpolitik lineage; nuncio-style negotiations."
+
+
+# ------------------------------------------------------------------
+#  L4  ·  Networks & Movements  (unchanged from v3)
+# ------------------------------------------------------------------
+[layer.L4.tag.NET_JES]
+label      = "Society of Jesus"
+short_def  = "Member of the Jesuit order (SJ)."
+notes      = "‘S.J.’ suffix; Ignatian discernment language; Jesuit universities."
+
+[layer.L4.tag.NET_SAL]
+label      = "Salesian"
+short_def  = "Member of the Salesians of Don Bosco (SDB)."
+notes      = "‘S.D.B.’; youth vocational centres; Don Bosco quotes."
+
+[layer.L4.tag.NET_FRAN]
+label      = "Franciscan family"
+short_def  = "OFM, Capuchin, or Conventual Franciscans."
+notes      = "O.F.M./Cap/Conv habit; poverty & peace emphasis."
+
+[layer.L4.tag.NET_DOM]
+label      = "Dominican Order"
+short_def  = "Member of the Order of Preachers (OP)."
+notes      = "O.P.; Thomistic preaching; Angelicum roles."
+
+[layer.L4.tag.NET_OPUS]
+label      = "Opus Dei"
+short_def  = "Member of Opus Dei."
+notes      = "Prelature clergy; sanctification-of-work rhetoric."
+
+[layer.L4.tag.NET_SANT]
+label      = "Sant'Egidio"
+short_def  = "Peace-mission collaborator or board member."
+notes      = "Sant’Egidio mediation missions; Trastevere base."
+
+[layer.L4.tag.NET_CL]
+label      = "Communion & Liberation"
+short_def  = "Keynote at Rimini Meeting; cites Giussani."
+notes      = "CL movement; Rimini Meeting; Giussani citations."
+
+[layer.L4.tag.NET_FOC]
+label      = "Focolare"
+short_def  = "Long-term collaborator/adviser to Focolare."
+notes      = "Focolare assemblies; ‘unity’ spirituality."
+
+[layer.L4.tag.NET_COMMUNIO]
+label      = "*Communio* circle"
+short_def  = "Editorial board or frequent contributor."
+notes      = "Frequent author in *Communio* journal."
+
+[layer.L4.tag.NET_CONCIL]
+label      = "*Concilium* circle"
+short_def  = "Editorial board or frequent contributor."
+notes      = "Frequent author in *Concilium* journal."
+
+[layer.L4.tag.NET_CHARIS]
+label      = "CHARIS (Charismatic Renewal)"
+short_def  = "Active leader/speaker in charismatic gatherings."
+notes      = "‘Baptism in the Spirit’; Renewal rallies."
+
+[layer.L4.tag.NET_NEOCAT]
+label      = "Neocatechumenal Way"
+short_def  = "Supports Neocatechumenal missions & Redemptoris Mater seminaries."
+notes      = "Redemptoris Mater seminaries; guitar liturgy."
+
+[layer.L4.tag.NET_RED]
+label      = "Redemptorists"
+short_def  = "Member of the Congregation of the Most Holy Redeemer (C.Ss.R.)."
+notes      = "‘C.Ss.R.’; Alphonsian moral-theology faculty."
+
+[layer.L4.tag.NET_SVD]
+label      = "Divine Word Missionaries"
+short_def  = "Member of the Society of the Divine Word (S.V.D.)."
+notes      = "Verbite missiology institutes; Steyl spirituality."
+
+[layer.L4.tag.NET_OCD]
+label      = "Discalced Carmelites"
+short_def  = "Member of the Order of Discalced Carmelites (O.C.D.)."
+notes      = "Carmelite mysticism; Discalced formation houses."
+
+[layer.L4.tag.NET_REGNUM]
+label      = "Regnum Christi / Legionaries"
+short_def  = "Legionary priest or senior Regnum Christi collaborator."
+notes      = "Legionary collar; youth evangelisation institutes."
+
+[layer.L4.tag.NET_SCHOEN]
+label      = "Schoenstatt Movement"
+short_def  = "Key leader, adviser, or board member of Schoenstatt."
+notes      = "Schoenstatt shrines; *Covenant of Love* rhetoric."
+
+[layer.L4.tag.NET_CNEUF]
+label      = "Chemin Neuf"
+short_def  = "Regular preacher/formator with the Chemin Neuf Community."
+notes      = "Chemin Neuf retreats; ecumenical household life."
+
+[layer.L4.tag.NET_NONE]
+label      = "No dominant network"
+short_def  = "No single movement or order clearly shapes the cardinal's influence."
+notes      = "No network rises above the significance threshold."
+
+[layer.L4.tag.NET_SECAM]
+label      = "SECAM network"
+short_def  = "Frequent leader/speaker in Symposium of Episcopal Conferences of Africa & Madagascar."
+notes      = "SECAM standing committee; Kampala, Accra meetings."
+
+[layer.L4.tag.NET_FABC]
+label      = "FABC network"
+short_def  = "Key actor in Federation of Asian Bishops' Conferences."
+notes      = "FABC central committee; Bangkok, Manila assemblies."
+
+[layer.L4.tag.NET_CELAM]
+label      = "CELAM network"
+short_def  = "Latin-American & Caribbean Episcopal Council leadership."
+notes      = "Presidency or department head; Medellín, Aparecida heritage."
+
+[layer.L4.tag.NET_UNK]
+label      = "Network Unknown"
+short_def  = "Evidence insufficient to assign any movement/order."
+notes      = "Differs from NET_NONE, which signals confirmed absence."
+
+[layer.L4.tag.NET_SHALOM]
+label      = "Shalom Community"
+short_def  = "Member or core collaborator of the Shalom Catholic Community."
+notes      = "Brazil-origin missionary movement; WYD concerts."
+
+[layer.L4.tag.NET_EMMAN]
+label      = "Emmanuel Community"
+short_def  = "Key leader/preacher with the Emmanuel Community."
+notes      = "Paris-rooted charismatic-missionary fraternity."
+
+
+# ------------------------------------------------------------------
+#  L5  ·  Conclave Factions & Alignments  (duplicated/oversized blocs removed)
+# ------------------------------------------------------------------
+[layer.L5.tag.FAC_IDE_DUBIA]
+label      = "‘Dubia’ caucus"
+short_def  = "Signatory of 2016 or 2023 dubia letters."
+notes      = "Public signatories questioning *Amoris* / *Synodus* doctrine."
+
+[layer.L5.tag.FAC_IDE_BURKE_SARAH]
+label      = "Burke–Sarah alliance"
+short_def  = "Traditional-liturgy hard-liners around Burke & Sarah."
+notes      = "Speakers at *Summorum Pontificum* conferences; NCReg columns."
+
+[layer.L5.tag.FAC_INS_PELL]
+label      = "Pell memorandum circle"
+short_def  = "Protégés or allies named in the 2022 ‘Demos’ memo."
+notes      = "Cardinals cited in Pell’s reform manifesto."
+
+[layer.L5.tag.FAC_INS_TAGLE]
+label      = "Team Tagle"
+short_def  = "Public champions or protégés of Cdl Tagle."
+notes      = "Joint pastoral projects; public endorsements."
+
+# ---- Curial sub-clusters -----------------------------------------
+[layer.L5.tag.FAC_CURIA_DIPLO]
+label      = "Curia – Diplomatic"
+short_def  = "Secretariat & nuncio veterans favouring Ostpolitik."
+notes      = "Parolin loyalists; China-Vietnam dialogue advocates."
+
+[layer.L5.tag.FAC_CURIA_DOCTRINE]
+label      = "Curia – Doctrinal"
+short_def  = "Dicastery for Doctrine alumni / theology prefects."
+notes      = "Current/former DDF officials; orthodoxy watchdogs."
+
+[layer.L5.tag.FAC_CURIA_ADMIN]
+label      = "Curia – Administrative"
+short_def  = "Economy, Governorate, APSA technocrats."
+notes      = "Budget, property, and legal specialists."
+
+# ---- Regional swing blocs ----------------------------------------
+[layer.L5.tag.FAC_REG_LATAM_CONT]
+label      = "Latin-American continuity"
+short_def  = "CELAM leadership aligned with Francis-era reforms."
+notes      = "Aparecida heritage; REPAM, Amazonia focus."
+
+[layer.L5.tag.FAC_REG_AFRICA]
+label      = "African bloc"
+short_def  = "SECAM-driven family & justice caucus."
+notes      = "African family-life & social-credit agenda."
+
+[layer.L5.tag.FAC_REG_ASIA]
+label      = "Asian bloc"
+short_def  = "FABC evangelisation & synodal advocates."
+notes      = "‘Triple dialogue’ theology; small-church growth."
+
+[layer.L5.tag.FAC_REG_ITALY_RES]
+label      = "Italian residential bishops"
+short_def  = "Non-Curial Italian ordinaries (late-round swing)."
+notes      = "CEI consensus builders; traditional conclave king-makers."
+
+# ---- Thematic micro-blocs ----------------------------------------
+[layer.L5.tag.FAC_IDE_TRAD]
+label      = "Traditionalist bloc"
+short_def  = "Public critics of synodal trajectory & liturgy restrictions."
+notes      = "Issue press statements opposing *Traditionis Custodes*."
+
+[layer.L5.tag.FAC_IDE_PROGRESS]
+label      = "Progressive bloc"
+short_def  = "Electors advocating substantive doctrinal development."
+notes      = "Fernández, Radcliffe wing; German & Latin-American progressives."
+
+[layer.L5.tag.FAC_IDE_GLOBAL_JUSTICE]
+label      = "Global-South justice caucus"
+short_def  = "SECAM–CELAM–FABC coalition on ecology & social debt."
+notes      = "Pushes climate reparations; periphery option."

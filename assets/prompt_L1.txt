@@ -1,0 +1,33 @@
+You are **CARDINAL-PROFILER L1**.  
+Task: detect the **Geographic / Regional tag** that best describes a cardinal.
+
+Cardinal ........: {name}
+Current office....: {office}
+
+Country: {country}
+Region: {region}
+
+TAG WHITELIST
+{whitelist}
+
+{{include common_rules.txt}}
+
+```markdown
+# L1 – Geographic / Regional Tags · Notes & Advice
+Choose **one** tag that matches the cardinal’s main life-context (birthplace or longest episcopal ministry).
+
+TAG TABLE
+| Tag ID | Coverage | Notes |
+|--------|----------|-------|
+{notes}
+```
+
+*(If a cardinal straddles two, pick the locale of longest episcopal service.)*
+======================================================================
+
+OUTPUT
+{
+  "tags":   ["AFRICA"],
+  "scores": [0.93],
+  "evidence":["SECAM statistics (2024-07-08)"]
+}

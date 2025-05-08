@@ -1,0 +1,265 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 850px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 850px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"bipartite": 0, "color": "#97c2fc", "id": "Pietro Parolin", "label": "Pietro Parolin", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_CURIA_DIPLO", "label": "FAC_CURIA_DIPLO", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_CURIA_ADMIN", "label": "FAC_CURIA_ADMIN", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Fernando Filoni", "label": "Fernando Filoni", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Luis Antonio Tagle", "label": "Luis Antonio Tagle", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_INS_TAGLE", "label": "FAC_INS_TAGLE", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_REG_ASIA", "label": "FAC_REG_ASIA", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_IDE_GLOBAL_JUSTICE", "label": "FAC_IDE_GLOBAL_JUSTICE", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Robert Francis Prevost OSA", "label": "Robert Francis Prevost OSA", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_IDE_PROGRESS", "label": "FAC_IDE_PROGRESS", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_REG_LATAM_CONT", "label": "FAC_REG_LATAM_CONT", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Louis Rapha\u00ebl I Sako", "label": "Louis Rapha\u00ebl I Sako", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Peter Turkson", "label": "Peter Turkson", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_REG_AFRICA", "label": "FAC_REG_AFRICA", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Philippe Barbarin", "label": "Philippe Barbarin", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_IDE_TRAD", "label": "FAC_IDE_TRAD", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "P\u00e9ter Erd\u0151", "label": "P\u00e9ter Erd\u0151", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_INS_PELL", "label": "FAC_INS_PELL", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Francisco Robles Ortega", "label": "Francisco Robles Ortega", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Odilo Scherer", "label": "Odilo Scherer", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Robert Sarah", "label": "Robert Sarah", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_IDE_BURKE_SARAH", "label": "FAC_IDE_BURKE_SARAH", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Raymond Leo Burke", "label": "Raymond Leo Burke", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_IDE_DUBIA", "label": "FAC_IDE_DUBIA", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Kurt Koch", "label": "Kurt Koch", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Malcolm Ranjith", "label": "Malcolm Ranjith", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Reinhard Marx", "label": "Reinhard Marx", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jo\u00e3o Braz de Aviz", "label": "Jo\u00e3o Braz de Aviz", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Wim Eijk", "label": "Wim Eijk", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Giuseppe Betori", "label": "Giuseppe Betori", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_REG_ITALY_RES", "label": "FAC_REG_ITALY_RES", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Rainer Woelki", "label": "Rainer Woelki", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "James Michael Harvey", "label": "James Michael Harvey", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Baselios Cleemis", "label": "Baselios Cleemis", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Gerhard Ludwig M\u00fcller", "label": "Gerhard Ludwig M\u00fcller", "shape": "dot", "size": 10}, {"bipartite": 1, "color": "#97c2fc", "id": "FAC_CURIA_DOCTRINE", "label": "FAC_CURIA_DOCTRINE", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Vincent Nichols", "label": "Vincent Nichols", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Leopoldo Brenes", "label": "Leopoldo Brenes", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "G\u00e9rald Lacroix ISPX", "label": "G\u00e9rald Lacroix ISPX", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jean-Pierre Kutwa", "label": "Jean-Pierre Kutwa", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Orani Jo\u00e3o Tempesta OCist", "label": "Orani Jo\u00e3o Tempesta OCist", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Mario Aurelio Poli", "label": "Mario Aurelio Poli", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Philippe Ou\u00e9draogo", "label": "Philippe Ou\u00e9draogo", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Chibly Langlois", "label": "Chibly Langlois", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Berhaneyesus Demerew Souraphiel CM", "label": "Berhaneyesus Demerew Souraphiel CM", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "John Dew", "label": "John Dew", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Charles Maung Bo SDB", "label": "Charles Maung Bo SDB", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Kriengsak Kovitvanit", "label": "Kriengsak Kovitvanit", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Francesco Montenegro", "label": "Francesco Montenegro", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Daniel Sturla SDB", "label": "Daniel Sturla SDB", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Arlindo Gomes Furtado", "label": "Arlindo Gomes Furtado", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Soane Patita Paini Mafi", "label": "Soane Patita Paini Mafi", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Dieudonn\u00e9 Nzapalainga CSSp", "label": "Dieudonn\u00e9 Nzapalainga CSSp", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Carlos Osoro Sierra", "label": "Carlos Osoro Sierra", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "S\u00e9rgio da Rocha", "label": "S\u00e9rgio da Rocha", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Blase J. Cupich", "label": "Blase J. Cupich", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jozef De Kesel", "label": "Jozef De Kesel", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Carlos Aguiar Retes", "label": "Carlos Aguiar Retes", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "John Ribat MSC", "label": "John Ribat MSC", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Joseph W. Tobin CSsR", "label": "Joseph W. Tobin CSsR", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Juan Jos\u00e9 Omella", "label": "Juan Jos\u00e9 Omella", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Anders Arborelius OCD", "label": "Anders Arborelius OCD", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Angelo De Donatis", "label": "Angelo De Donatis", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Joseph Coutts", "label": "Joseph Coutts", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Ant\u00f3nio Marto", "label": "Ant\u00f3nio Marto", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "D\u00e9sir\u00e9 Tsarahazana", "label": "D\u00e9sir\u00e9 Tsarahazana", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Giuseppe Petrocchi", "label": "Giuseppe Petrocchi", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Thomas Aquino Manyo Maeda", "label": "Thomas Aquino Manyo Maeda", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Ignatius Suharyo Hardjoatmodjo", "label": "Ignatius Suharyo Hardjoatmodjo", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Juan Garc\u00eda Rodr\u00edguez", "label": "Juan Garc\u00eda Rodr\u00edguez", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Fridolin Ambongo Besungu OFMCap", "label": "Fridolin Ambongo Besungu OFMCap", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jean-Claude Hollerich SJ", "label": "Jean-Claude Hollerich SJ", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "\u00c1lvaro Leonel Ramazzini Imeri", "label": "\u00c1lvaro Leonel Ramazzini Imeri", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Matteo Zuppi", "label": "Matteo Zuppi", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Crist\u00f3bal L\u00f3pez Romero SDB", "label": "Crist\u00f3bal L\u00f3pez Romero SDB", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Antoine Kambanda", "label": "Antoine Kambanda", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Wilton Daniel Gregory", "label": "Wilton Daniel Gregory", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jose Advincula OP", "label": "Jose Advincula OP", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Augusto Paolo Lojudice", "label": "Augusto Paolo Lojudice", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jean-Marc Aveline", "label": "Jean-Marc Aveline", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Peter Okpaleke", "label": "Peter Okpaleke", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Leonardo Ulrich Steiner OFM", "label": "Leonardo Ulrich Steiner OFM", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Filipe Neri Ferr\u00e3o", "label": "Filipe Neri Ferr\u00e3o", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Robert McElroy", "label": "Robert McElroy", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Virg\u00edlio do Carmo da Silva SDB", "label": "Virg\u00edlio do Carmo da Silva SDB", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Oscar Cantoni", "label": "Oscar Cantoni", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Anthony Poola", "label": "Anthony Poola", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Paulo Cezar Costa", "label": "Paulo Cezar Costa", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "William Goh", "label": "William Goh", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Adalberto Mart\u00ednez Flores", "label": "Adalberto Mart\u00ednez Flores", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Giorgio Marengo IMC", "label": "Giorgio Marengo IMC", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Pierbattista Pizzaballa OFM", "label": "Pierbattista Pizzaballa OFM", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Stephen Brislin", "label": "Stephen Brislin", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "\u00c1ngel Sixto Rossi SJ", "label": "\u00c1ngel Sixto Rossi SJ", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Luis Jos\u00e9 Rueda Aparicio", "label": "Luis Jos\u00e9 Rueda Aparicio", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Grzegorz Ry\u015b", "label": "Grzegorz Ry\u015b", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Stephen Ameyu Martin Mulla", "label": "Stephen Ameyu Martin Mulla", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jos\u00e9 Cobo Cano", "label": "Jos\u00e9 Cobo Cano", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Protase Rugambwa", "label": "Protase Rugambwa", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Sebastian Francis", "label": "Sebastian Francis", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Stephen Chow Sau-yan SJ", "label": "Stephen Chow Sau-yan SJ", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Am\u00e9rico Aguiar", "label": "Am\u00e9rico Aguiar", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Carlos Castillo Mattasoglio", "label": "Carlos Castillo Mattasoglio", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Vicente Bokalic Iglic CM", "label": "Vicente Bokalic Iglic CM", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Luis Cabrera Herrera OFM", "label": "Luis Cabrera Herrera OFM", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Fernando Chomal\u00ed Garib", "label": "Fernando Chomal\u00ed Garib", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Tarcisio Isao Kikuchi SVD", "label": "Tarcisio Isao Kikuchi SVD", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Pablo Virgilio David", "label": "Pablo Virgilio David", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jaime Spengler OFM", "label": "Jaime Spengler OFM", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Ignace Bessi Dogbo", "label": "Ignace Bessi Dogbo", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jean-Paul Vesco OP", "label": "Jean-Paul Vesco OP", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Dominique Mathieu OFMConv", "label": "Dominique Mathieu OFMConv", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Roberto Repole", "label": "Roberto Repole", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Baldassare Reina", "label": "Baldassare Reina", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Domenico Battaglia", "label": "Domenico Battaglia", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Dominique Mamberti", "label": "Dominique Mamberti", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Mario Zenari", "label": "Mario Zenari", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Kevin Farrell", "label": "Kevin Farrell", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Konrad Krajewski", "label": "Konrad Krajewski", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Jos\u00e9 Tolentino de Mendon\u00e7a", "label": "Jos\u00e9 Tolentino de Mendon\u00e7a", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Michael Czerny SJ", "label": "Michael Czerny SJ", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Mario Grech", "label": "Mario Grech", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Marcello Semeraro", "label": "Marcello Semeraro", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Mauro Gambetti OFMConv", "label": "Mauro Gambetti OFMConv", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Arthur Roche", "label": "Arthur Roche", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Lazarus You Heung-sik", "label": "Lazarus You Heung-sik", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Claudio Gugerotti", "label": "Claudio Gugerotti", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "V\u00edctor Manuel Fern\u00e1ndez", "label": "V\u00edctor Manuel Fern\u00e1ndez", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Emil Paul Tscherrig", "label": "Emil Paul Tscherrig", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Christophe Pierre", "label": "Christophe Pierre", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "\u00c1ngel Fern\u00e1ndez Artime SDB", "label": "\u00c1ngel Fern\u00e1ndez Artime SDB", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Rolandas Makrickas", "label": "Rolandas Makrickas", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Timothy Radcliffe OP", "label": "Timothy Radcliffe OP", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Fabio Baggio CS", "label": "Fabio Baggio CS", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "George Koovakad", "label": "George Koovakad", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Vinko Pulji\u0107", "label": "Vinko Pulji\u0107", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Josip Bozani\u0107", "label": "Josip Bozani\u0107", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Stanis\u0142aw Ry\u0142ko", "label": "Stanis\u0142aw Ry\u0142ko", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Daniel DiNardo", "label": "Daniel DiNardo", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Kazimierz Nycz", "label": "Kazimierz Nycz", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Thomas Collins", "label": "Thomas Collins", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Timothy Dolan", "label": "Timothy Dolan", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Manuel Clemente", "label": "Manuel Clemente", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Fran\u00e7ois-Xavier Bustillo OFMConv", "label": "Fran\u00e7ois-Xavier Bustillo OFMConv", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Ladislav Nemet SVD", "label": "Ladislav Nemet SVD", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Frank Leo", "label": "Frank Leo", "shape": "dot", "size": 10}, {"bipartite": 0, "color": "#97c2fc", "id": "Mykola Bychok CSsR", "label": "Mykola Bychok CSsR", "shape": "dot", "size": 10}]);
+                  edges = new vis.DataSet([{"from": "Pietro Parolin", "to": "FAC_CURIA_DIPLO", "width": 0.85}, {"from": "Pietro Parolin", "to": "FAC_CURIA_ADMIN", "width": 0.45}, {"from": "Fernando Filoni", "to": "FAC_CURIA_DIPLO", "width": 0.75}, {"from": "Luis Antonio Tagle", "to": "FAC_INS_TAGLE", "width": 0.9}, {"from": "Luis Antonio Tagle", "to": "FAC_REG_ASIA", "width": 0.6}, {"from": "Luis Antonio Tagle", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Robert Francis Prevost OSA", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Robert Francis Prevost OSA", "to": "FAC_REG_LATAM_CONT", "width": 0.3}, {"from": "Louis Rapha\u00ebl I Sako", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Peter Turkson", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.75}, {"from": "Peter Turkson", "to": "FAC_REG_AFRICA", "width": 0.45}, {"from": "Peter Turkson", "to": "FAC_CURIA_ADMIN", "width": 0.3}, {"from": "Philippe Barbarin", "to": "FAC_IDE_TRAD", "width": 0.32}, {"from": "P\u00e9ter Erd\u0151", "to": "FAC_INS_PELL", "width": 0.45}, {"from": "P\u00e9ter Erd\u0151", "to": "FAC_IDE_TRAD", "width": 0.3}, {"from": "Francisco Robles Ortega", "to": "FAC_REG_LATAM_CONT", "width": 0.46}, {"from": "Odilo Scherer", "to": "FAC_REG_LATAM_CONT", "width": 0.55}, {"from": "Odilo Scherer", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Robert Sarah", "to": "FAC_IDE_BURKE_SARAH", "width": 0.9}, {"from": "Robert Sarah", "to": "FAC_IDE_TRAD", "width": 0.7}, {"from": "Robert Sarah", "to": "FAC_REG_AFRICA", "width": 0.4}, {"from": "Raymond Leo Burke", "to": "FAC_IDE_BURKE_SARAH", "width": 0.95}, {"from": "Raymond Leo Burke", "to": "FAC_IDE_DUBIA", "width": 0.92}, {"from": "Raymond Leo Burke", "to": "FAC_IDE_TRAD", "width": 0.8}, {"from": "Kurt Koch", "to": "FAC_CURIA_DIPLO", "width": 0.45}, {"from": "Kurt Koch", "to": "FAC_IDE_TRAD", "width": 0.3}, {"from": "Malcolm Ranjith", "to": "FAC_IDE_TRAD", "width": 0.55}, {"from": "Malcolm Ranjith", "to": "FAC_REG_ASIA", "width": 0.45}, {"from": "Reinhard Marx", "to": "FAC_IDE_PROGRESS", "width": 0.82}, {"from": "Reinhard Marx", "to": "FAC_CURIA_ADMIN", "width": 0.52}, {"from": "Jo\u00e3o Braz de Aviz", "to": "FAC_IDE_PROGRESS", "width": 0.72}, {"from": "Jo\u00e3o Braz de Aviz", "to": "FAC_REG_LATAM_CONT", "width": 0.63}, {"from": "Wim Eijk", "to": "FAC_IDE_TRAD", "width": 0.55}, {"from": "Giuseppe Betori", "to": "FAC_REG_ITALY_RES", "width": 0.55}, {"from": "Rainer Woelki", "to": "FAC_IDE_TRAD", "width": 0.55}, {"from": "James Michael Harvey", "to": "FAC_CURIA_ADMIN", "width": 0.75}, {"from": "James Michael Harvey", "to": "FAC_CURIA_DIPLO", "width": 0.6}, {"from": "Baselios Cleemis", "to": "FAC_REG_ASIA", "width": 0.55}, {"from": "Baselios Cleemis", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Gerhard Ludwig M\u00fcller", "to": "FAC_CURIA_DOCTRINE", "width": 0.85}, {"from": "Gerhard Ludwig M\u00fcller", "to": "FAC_IDE_TRAD", "width": 0.75}, {"from": "Gerhard Ludwig M\u00fcller", "to": "FAC_IDE_BURKE_SARAH", "width": 0.45}, {"from": "Vincent Nichols", "to": "FAC_IDE_PROGRESS", "width": 0.42}, {"from": "Leopoldo Brenes", "to": "FAC_REG_LATAM_CONT", "width": 0.7}, {"from": "Leopoldo Brenes", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Leopoldo Brenes", "to": "FAC_IDE_PROGRESS", "width": 0.3}, {"from": "G\u00e9rald Lacroix ISPX", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Jean-Pierre Kutwa", "to": "FAC_REG_AFRICA", "width": 0.48}, {"from": "Orani Jo\u00e3o Tempesta OCist", "to": "FAC_REG_LATAM_CONT", "width": 0.55}, {"from": "Mario Aurelio Poli", "to": "FAC_REG_LATAM_CONT", "width": 0.75}, {"from": "Mario Aurelio Poli", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Mario Aurelio Poli", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Philippe Ou\u00e9draogo", "to": "FAC_REG_AFRICA", "width": 0.75}, {"from": "Philippe Ou\u00e9draogo", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Chibly Langlois", "to": "FAC_REG_LATAM_CONT", "width": 0.55}, {"from": "Chibly Langlois", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Berhaneyesus Demerew Souraphiel CM", "to": "FAC_REG_AFRICA", "width": 0.55}, {"from": "Berhaneyesus Demerew Souraphiel CM", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "John Dew", "to": "FAC_IDE_PROGRESS", "width": 0.78}, {"from": "John Dew", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.48}, {"from": "Charles Maung Bo SDB", "to": "FAC_REG_ASIA", "width": 0.8}, {"from": "Charles Maung Bo SDB", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.55}, {"from": "Kriengsak Kovitvanit", "to": "FAC_REG_ASIA", "width": 0.65}, {"from": "Francesco Montenegro", "to": "FAC_REG_ITALY_RES", "width": 0.65}, {"from": "Francesco Montenegro", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.55}, {"from": "Francesco Montenegro", "to": "FAC_IDE_PROGRESS", "width": 0.3}, {"from": "Daniel Sturla SDB", "to": "FAC_REG_LATAM_CONT", "width": 0.6}, {"from": "Arlindo Gomes Furtado", "to": "FAC_REG_AFRICA", "width": 0.6}, {"from": "Arlindo Gomes Furtado", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Soane Patita Paini Mafi", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.57}, {"from": "Dieudonn\u00e9 Nzapalainga CSSp", "to": "FAC_REG_AFRICA", "width": 0.58}, {"from": "Dieudonn\u00e9 Nzapalainga CSSp", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.34}, {"from": "Carlos Osoro Sierra", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "S\u00e9rgio da Rocha", "to": "FAC_REG_LATAM_CONT", "width": 0.6}, {"from": "S\u00e9rgio da Rocha", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Blase J. Cupich", "to": "FAC_IDE_PROGRESS", "width": 0.78}, {"from": "Jozef De Kesel", "to": "FAC_IDE_PROGRESS", "width": 0.75}, {"from": "Carlos Aguiar Retes", "to": "FAC_REG_LATAM_CONT", "width": 0.78}, {"from": "Carlos Aguiar Retes", "to": "FAC_IDE_PROGRESS", "width": 0.55}, {"from": "Carlos Aguiar Retes", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.32}, {"from": "John Ribat MSC", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.55}, {"from": "John Ribat MSC", "to": "FAC_REG_ASIA", "width": 0.32}, {"from": "Joseph W. Tobin CSsR", "to": "FAC_IDE_PROGRESS", "width": 0.65}, {"from": "Juan Jos\u00e9 Omella", "to": "FAC_IDE_PROGRESS", "width": 0.75}, {"from": "Juan Jos\u00e9 Omella", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Anders Arborelius OCD", "to": "FAC_IDE_PROGRESS", "width": 0.5}, {"from": "Anders Arborelius OCD", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Angelo De Donatis", "to": "FAC_CURIA_DOCTRINE", "width": 0.42}, {"from": "Joseph Coutts", "to": "FAC_REG_ASIA", "width": 0.55}, {"from": "Joseph Coutts", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.42}, {"from": "Ant\u00f3nio Marto", "to": "FAC_IDE_PROGRESS", "width": 0.75}, {"from": "D\u00e9sir\u00e9 Tsarahazana", "to": "FAC_REG_AFRICA", "width": 0.6}, {"from": "D\u00e9sir\u00e9 Tsarahazana", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Giuseppe Petrocchi", "to": "FAC_REG_ITALY_RES", "width": 0.45}, {"from": "Thomas Aquino Manyo Maeda", "to": "FAC_REG_ASIA", "width": 0.55}, {"from": "Thomas Aquino Manyo Maeda", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.32}, {"from": "Ignatius Suharyo Hardjoatmodjo", "to": "FAC_REG_ASIA", "width": 0.75}, {"from": "Ignatius Suharyo Hardjoatmodjo", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Juan Garc\u00eda Rodr\u00edguez", "to": "FAC_REG_LATAM_CONT", "width": 0.55}, {"from": "Juan Garc\u00eda Rodr\u00edguez", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Fridolin Ambongo Besungu OFMCap", "to": "FAC_REG_AFRICA", "width": 0.78}, {"from": "Fridolin Ambongo Besungu OFMCap", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.7}, {"from": "Fridolin Ambongo Besungu OFMCap", "to": "FAC_IDE_PROGRESS", "width": 0.35}, {"from": "Jean-Claude Hollerich SJ", "to": "FAC_IDE_PROGRESS", "width": 0.8}, {"from": "\u00c1lvaro Leonel Ramazzini Imeri", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.78}, {"from": "\u00c1lvaro Leonel Ramazzini Imeri", "to": "FAC_REG_LATAM_CONT", "width": 0.46}, {"from": "Matteo Zuppi", "to": "FAC_REG_ITALY_RES", "width": 0.75}, {"from": "Matteo Zuppi", "to": "FAC_IDE_PROGRESS", "width": 0.7}, {"from": "Crist\u00f3bal L\u00f3pez Romero SDB", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.55}, {"from": "Crist\u00f3bal L\u00f3pez Romero SDB", "to": "FAC_IDE_PROGRESS", "width": 0.35}, {"from": "Antoine Kambanda", "to": "FAC_REG_AFRICA", "width": 0.75}, {"from": "Antoine Kambanda", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Wilton Daniel Gregory", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Jose Advincula OP", "to": "FAC_REG_ASIA", "width": 0.6}, {"from": "Jose Advincula OP", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Augusto Paolo Lojudice", "to": "FAC_REG_ITALY_RES", "width": 0.75}, {"from": "Augusto Paolo Lojudice", "to": "FAC_IDE_PROGRESS", "width": 0.5}, {"from": "Augusto Paolo Lojudice", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Jean-Marc Aveline", "to": "FAC_IDE_PROGRESS", "width": 0.7}, {"from": "Jean-Marc Aveline", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Peter Okpaleke", "to": "FAC_REG_AFRICA", "width": 0.6}, {"from": "Leonardo Ulrich Steiner OFM", "to": "FAC_REG_LATAM_CONT", "width": 0.75}, {"from": "Leonardo Ulrich Steiner OFM", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.65}, {"from": "Leonardo Ulrich Steiner OFM", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Filipe Neri Ferr\u00e3o", "to": "FAC_REG_ASIA", "width": 0.45}, {"from": "Robert McElroy", "to": "FAC_IDE_PROGRESS", "width": 0.78}, {"from": "Robert McElroy", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Virg\u00edlio do Carmo da Silva SDB", "to": "FAC_REG_ASIA", "width": 0.65}, {"from": "Virg\u00edlio do Carmo da Silva SDB", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Oscar Cantoni", "to": "FAC_REG_ITALY_RES", "width": 0.55}, {"from": "Anthony Poola", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Anthony Poola", "to": "FAC_REG_ASIA", "width": 0.4}, {"from": "Paulo Cezar Costa", "to": "FAC_REG_LATAM_CONT", "width": 0.7}, {"from": "Paulo Cezar Costa", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "William Goh", "to": "FAC_REG_ASIA", "width": 0.55}, {"from": "Adalberto Mart\u00ednez Flores", "to": "FAC_REG_LATAM_CONT", "width": 0.65}, {"from": "Adalberto Mart\u00ednez Flores", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Giorgio Marengo IMC", "to": "FAC_REG_ASIA", "width": 0.45}, {"from": "Pierbattista Pizzaballa OFM", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Stephen Brislin", "to": "FAC_REG_AFRICA", "width": 0.7}, {"from": "Stephen Brislin", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.5}, {"from": "\u00c1ngel Sixto Rossi SJ", "to": "FAC_REG_LATAM_CONT", "width": 0.6}, {"from": "\u00c1ngel Sixto Rossi SJ", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Luis Jos\u00e9 Rueda Aparicio", "to": "FAC_REG_LATAM_CONT", "width": 0.68}, {"from": "Luis Jos\u00e9 Rueda Aparicio", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.42}, {"from": "Grzegorz Ry\u015b", "to": "FAC_IDE_PROGRESS", "width": 0.55}, {"from": "Stephen Ameyu Martin Mulla", "to": "FAC_REG_AFRICA", "width": 0.55}, {"from": "Jos\u00e9 Cobo Cano", "to": "FAC_IDE_PROGRESS", "width": 0.75}, {"from": "Protase Rugambwa", "to": "FAC_REG_AFRICA", "width": 0.55}, {"from": "Sebastian Francis", "to": "FAC_REG_ASIA", "width": 0.55}, {"from": "Sebastian Francis", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Stephen Chow Sau-yan SJ", "to": "FAC_CURIA_DIPLO", "width": 0.55}, {"from": "Stephen Chow Sau-yan SJ", "to": "FAC_REG_ASIA", "width": 0.65}, {"from": "Stephen Chow Sau-yan SJ", "to": "FAC_IDE_PROGRESS", "width": 0.3}, {"from": "Am\u00e9rico Aguiar", "to": "FAC_IDE_PROGRESS", "width": 0.55}, {"from": "Carlos Castillo Mattasoglio", "to": "FAC_REG_LATAM_CONT", "width": 0.75}, {"from": "Carlos Castillo Mattasoglio", "to": "FAC_IDE_PROGRESS", "width": 0.65}, {"from": "Carlos Castillo Mattasoglio", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.45}, {"from": "Vicente Bokalic Iglic CM", "to": "FAC_REG_LATAM_CONT", "width": 0.45}, {"from": "Vicente Bokalic Iglic CM", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Luis Cabrera Herrera OFM", "to": "FAC_REG_LATAM_CONT", "width": 0.47}, {"from": "Luis Cabrera Herrera OFM", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.32}, {"from": "Fernando Chomal\u00ed Garib", "to": "FAC_CURIA_DOCTRINE", "width": 0.72}, {"from": "Fernando Chomal\u00ed Garib", "to": "FAC_REG_LATAM_CONT", "width": 0.5}, {"from": "Tarcisio Isao Kikuchi SVD", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.65}, {"from": "Tarcisio Isao Kikuchi SVD", "to": "FAC_REG_ASIA", "width": 0.45}, {"from": "Pablo Virgilio David", "to": "FAC_REG_ASIA", "width": 0.75}, {"from": "Pablo Virgilio David", "to": "FAC_INS_TAGLE", "width": 0.5}, {"from": "Pablo Virgilio David", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.35}, {"from": "Jaime Spengler OFM", "to": "FAC_REG_LATAM_CONT", "width": 0.72}, {"from": "Jaime Spengler OFM", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.48}, {"from": "Jaime Spengler OFM", "to": "FAC_IDE_PROGRESS", "width": 0.3}, {"from": "Ignace Bessi Dogbo", "to": "FAC_REG_AFRICA", "width": 0.45}, {"from": "Jean-Paul Vesco OP", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Jean-Paul Vesco OP", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Dominique Mathieu OFMConv", "to": "FAC_REG_ASIA", "width": 0.3}, {"from": "Roberto Repole", "to": "FAC_IDE_PROGRESS", "width": 0.72}, {"from": "Roberto Repole", "to": "FAC_REG_ITALY_RES", "width": 0.6}, {"from": "Baldassare Reina", "to": "FAC_REG_ITALY_RES", "width": 0.55}, {"from": "Domenico Battaglia", "to": "FAC_REG_ITALY_RES", "width": 0.75}, {"from": "Domenico Battaglia", "to": "FAC_IDE_PROGRESS", "width": 0.45}, {"from": "Dominique Mamberti", "to": "FAC_CURIA_DIPLO", "width": 0.8}, {"from": "Mario Zenari", "to": "FAC_CURIA_DIPLO", "width": 0.78}, {"from": "Kevin Farrell", "to": "FAC_IDE_PROGRESS", "width": 0.78}, {"from": "Kevin Farrell", "to": "FAC_CURIA_ADMIN", "width": 0.42}, {"from": "Konrad Krajewski", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.6}, {"from": "Konrad Krajewski", "to": "FAC_IDE_PROGRESS", "width": 0.35}, {"from": "Jos\u00e9 Tolentino de Mendon\u00e7a", "to": "FAC_IDE_PROGRESS", "width": 0.65}, {"from": "Jos\u00e9 Tolentino de Mendon\u00e7a", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.3}, {"from": "Michael Czerny SJ", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.8}, {"from": "Michael Czerny SJ", "to": "FAC_IDE_PROGRESS", "width": 0.55}, {"from": "Mario Grech", "to": "FAC_IDE_PROGRESS", "width": 0.78}, {"from": "Marcello Semeraro", "to": "FAC_IDE_PROGRESS", "width": 0.76}, {"from": "Mauro Gambetti OFMConv", "to": "FAC_CURIA_ADMIN", "width": 0.72}, {"from": "Arthur Roche", "to": "FAC_IDE_PROGRESS", "width": 0.72}, {"from": "Lazarus You Heung-sik", "to": "FAC_REG_ASIA", "width": 0.6}, {"from": "Lazarus You Heung-sik", "to": "FAC_IDE_PROGRESS", "width": 0.3}, {"from": "Claudio Gugerotti", "to": "FAC_CURIA_DIPLO", "width": 0.8}, {"from": "V\u00edctor Manuel Fern\u00e1ndez", "to": "FAC_CURIA_DOCTRINE", "width": 0.88}, {"from": "V\u00edctor Manuel Fern\u00e1ndez", "to": "FAC_IDE_PROGRESS", "width": 0.83}, {"from": "V\u00edctor Manuel Fern\u00e1ndez", "to": "FAC_REG_LATAM_CONT", "width": 0.62}, {"from": "Emil Paul Tscherrig", "to": "FAC_CURIA_DIPLO", "width": 0.65}, {"from": "Christophe Pierre", "to": "FAC_CURIA_DIPLO", "width": 0.8}, {"from": "Christophe Pierre", "to": "FAC_IDE_PROGRESS", "width": 0.3}, {"from": "\u00c1ngel Fern\u00e1ndez Artime SDB", "to": "FAC_IDE_PROGRESS", "width": 0.55}, {"from": "Rolandas Makrickas", "to": "FAC_CURIA_ADMIN", "width": 0.45}, {"from": "Rolandas Makrickas", "to": "FAC_CURIA_DIPLO", "width": 0.3}, {"from": "Timothy Radcliffe OP", "to": "FAC_IDE_PROGRESS", "width": 0.75}, {"from": "Fabio Baggio CS", "to": "FAC_IDE_GLOBAL_JUSTICE", "width": 0.8}, {"from": "Fabio Baggio CS", "to": "FAC_IDE_PROGRESS", "width": 0.4}, {"from": "George Koovakad", "to": "FAC_REG_ASIA", "width": 0.55}, {"from": "George Koovakad", "to": "FAC_CURIA_DIPLO", "width": 0.45}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": [
+            "physics"
+        ]
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

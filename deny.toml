@@ -1,0 +1,4 @@
+[sources]
+# stub for cargo-deny configuration
+[[sources.crates-io]]
+check = true
